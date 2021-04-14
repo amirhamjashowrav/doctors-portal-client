@@ -4,11 +4,12 @@ import {
   Switch,
   Route,
 } from "react-router-dom";
-import AllPatients from "./components/Allpatients/AllPatients/AllPatients";
 import Appointment from "./components/Appointment/Appointment/Appointment";
-import Dashboard from "./components/Dashboard/Dashboard/Dashboard";
+import Dashboard from './components/Dashboard/Dashboard/Dashboard';
 import Home from "./components/Home/Home/Home";
 import Login from "./components/Login/Login/Login";
+import AddDoctor from './components/AddDoctor/AddDoctor';
+import AllPatients from './components/Allpatients/AllPatients/AllPatients';
 
 
 export const UserContext = createContext();
@@ -30,12 +31,15 @@ function App() {
         <Route path="/appointment">
           <Appointment></Appointment>
         </Route>
-        <Route path="/dashboard/appointment">
+        <Route path="/dashboard">
           <Dashboard></Dashboard>
         </Route>
-        <Route path="/dashboard/allPatients">
+        <Route path="/allPatients">
             <AllPatients></AllPatients>
-          </Route>
+        </Route>
+        <Route path="/addDoctor">
+            <AddDoctor></AddDoctor>
+        </Route>
         <Route path="/login">
            <Login></Login>
         </Route>

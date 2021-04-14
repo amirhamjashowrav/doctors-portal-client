@@ -1,8 +1,9 @@
-import React, {useEffect, useState} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import Sidebar from '../Sidebar/Sidebar';
 import AppointmentsByDate from '../AppointmentsByDate/AppointmentsByDate';
 import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
+import { UserContext } from '../../../App';
 
 const containerStyle = {
     backgroundColor: "#F4FDFB",
@@ -10,6 +11,7 @@ const containerStyle = {
 }
 
 const Dashboard = () => {
+    const [loggedInUser, setLoggedInUser] = useContext(UserContext);
     const [selectedDate, setSelectedDate] = useState(new Date());
     const [appointments, setAppointments] = useState([]);
 
@@ -18,14 +20,14 @@ const Dashboard = () => {
     }
 
     useEffect(() => {
-        fetch('http://localhost:5000/apointmentsByDate', {
+        fetch('https://tranquil-basin-09507.herokuapp.com/apointmentsByDate', {
             method: 'POST',
             headers: { 'content-type' : 'application/json'},
-            body: JSON.stringify({date: selectedDate})
+            body: JSON.stringify({date: selectedDate, email: loggedInUser.email})
         })
         .then(res => res.json())
         .then(data => setAppointments(data))
-    }, [selectedDate])
+    }, [selectedDate, loggedInUser.email])
 
     return (
         <section>
